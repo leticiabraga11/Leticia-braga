@@ -1,0 +1,154 @@
+package Views;
+
+import BancoDados.FileHandler;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import Niveis.Niveism;
+import Niveis.Nivelseis;
+
+public class View extends JFrame {
+
+    private JLabel lbNome;
+    private JLabel lbIdade;
+    private JLabel lbFundo;
+    private JTextField txtNome;
+    private JButton btnComecar;
+    private JLabel lbApresentacao;
+    private JTextField txtIdade;
+    private JLabel lbNivel;
+    private JButton btnN1;
+    private JButton btnN2;
+    private JButton btnN3;
+    private JButton btnN4;
+
+    ImageIcon fundo = new ImageIcon(getClass().getResource("../Imagens/fundomat.jpg"));
+
+    public View() {
+
+        setSize(400, 500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(null);
+
+        lbFundo = new JLabel();
+        lbFundo.setBounds(0, 0, 400, 500);
+        lbFundo.setIcon(fundo);
+
+        lbApresentacao = new JLabel("Cadastro Jogador");
+        lbApresentacao.setBounds(130, 30, 200, 20);
+
+        lbNome = new JLabel("Nome: ");
+        // x  y
+        lbNome.setBounds(20, 75, 80, 30);
+
+        lbIdade = new JLabel("Idade:");
+        lbIdade.setBounds(20, 120, 80, 40);
+
+        txtNome = new JTextField();
+        txtNome.setBounds(60, 80, 300, 20);
+
+        txtIdade = new JTextField();
+        txtIdade.setBounds(60, 130, 250, 20);
+
+        lbNivel = new JLabel("Escolha o Nivel:");
+        lbNivel.setBounds(20, 160, 200, 80);
+
+        btnN1 = new JButton("6°Ano");
+        btnN1.setBounds(60, 230, 100, 40);
+
+        btnN2 = new JButton("7°Ano");
+        btnN2.setBounds(60, 300, 100, 40);
+
+        btnN3 = new JButton("8°Ano");
+        btnN3.setBounds(220, 230, 100, 40);
+
+        btnN4 = new JButton("9°Ano");
+        btnN4.setBounds(220, 300, 100, 40);
+
+        //btnComecar = new JButton("Comecar");
+        //btnComecar.setBounds(270, 400, 90, 30);
+        btnN1.addActionListener((ActionEvent e) -> {
+            setData();
+            showData();
+            Nivelseis();
+        });
+
+        btnN2.addActionListener((ActionEvent e) -> {
+            setData();
+            showData();
+            Nivelsete();
+        });
+
+        btnN3.addActionListener((ActionEvent e) -> {
+            setData();
+            showData();
+            Niveloito();
+        });
+
+        btnN4.addActionListener((ActionEvent e) -> {
+            setData();
+            showData();
+            Nivelnove();
+        });
+
+        add(txtNome);
+        //add(btnComecar);
+        add(lbApresentacao);
+        add(lbNome);
+        add(lbIdade);
+        add(txtIdade);
+        add(lbNivel);
+        add(btnN1);
+        add(btnN2);
+        add(btnN3);
+        add(btnN4);
+        add(lbFundo);
+
+        setVisible(true);
+
+    }
+
+    public void setData() {
+        String nome = txtNome.getText();
+        FileHandler.escrever(nome, "usuarios.txt", true);
+    }
+
+    public void showData() {
+        String data = FileHandler.ler("usuarios.txt");
+
+    }
+
+    public void Nivelseis() {
+        new Niveis.Nivelseis();
+    }
+
+    public void Nivelsete() {
+        new Niveis.Nivelsete();
+    }
+
+    public void Niveloito() {
+        new Niveis.Niveloito();
+    }
+
+    public void Nivelnove() {
+        new Niveis.Nivelnove();
+    }
+
+    public static void main(String[] args) {
+        //chamamos o metodo construtor
+        new View();
+    }
+
+}
